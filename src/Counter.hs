@@ -29,9 +29,9 @@ instance NgramCounter UniCount where
                 where
                         key = n_0 wb
                         
-        add first second = Map.unionWith (+) first second
+        add = Map.unionWith (+)
         
-        weight uniCount weight = Map.mapWithKey (\_ x -> x*(w weight)) uniCount
+        weight uniCount weight = Map.mapWithKey (\_ x -> x *  w weight) uniCount
                                
           
 --2-gram         
@@ -48,7 +48,7 @@ instance NgramCounter BiCount where
                         uniCount = Map.findWithDefault Map.empty key biCount
                         newValue = increment uniCount wb
                         
-        add first second = Map.unionWith add first second
+        add = Map.unionWith add
         
         weight biCount w = Map.mapWithKey (\_ x -> weight x w) biCount        
                              
@@ -67,7 +67,7 @@ instance NgramCounter TriCount where
                 biCount = Map.findWithDefault Map.empty key triCount
                 newValue = increment biCount wb
                 
-        add first second = Map.unionWith add first second
+        add = Map.unionWith add
         
         weight triCount w = Map.mapWithKey (\_ x -> weight x w) triCount
 
@@ -106,9 +106,9 @@ instance NgramCounter Counter where
 --count a list of words (3,2,1-gram)    
 countWords:: [String] -> Counter
 countWords words =
-            foldl (\count cb -> increment count cb) eCount cbList
+            foldl increment eCount cbList
             where
-                    cbList = scanl (\cb word -> advanceWord cb word) eWB words
+                    cbList = scanl advanceWord eWB words
                     
 --create prediction function using linear interpolation
 linInterpolate:: Counter -> Weights -> Counter

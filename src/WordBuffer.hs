@@ -18,11 +18,11 @@ addChar :: WordBuffer -> Char -> WordBuffer
 addChar wb ch = WordBuffer w2 w1 w0
         where w2 = n_2 wb
               w1 = n_1 wb
-              w0 = reverse $ ch : (reverse $ n_0 wb)
+              w0 = reverse $ ch : reverse ( n_0 wb)
 
 --add new word to buffer pushing back others
 advanceWord :: WordBuffer -> String -> WordBuffer
-advanceWord wb word = WordBuffer w1 w0 word
+advanceWord wb = WordBuffer w1 w0
         where w1 = n_1 wb
               w0 = n_0 wb
 

@@ -23,7 +23,7 @@ predictLoop :: Predictor -> WordBuffer ->IO()
 predictLoop pred wb= do
         let preds = predict pred wb 5
         putStr "\ESC[2J\n"
-        putStrLn $ show $ preds
+        print preds
         putStrLn $ showWords wb
         next <- getChar
         if next == '!'
@@ -40,7 +40,7 @@ pickAction next preds wb
 --n = char to int. If n < |Predictions|, advanceword Predictions[n]
 checkPredictions :: Char -> UniPredict -> WordBuffer -> WordBuffer
 checkPredictions next preds wb =
-        if dig >= ( length preds)
+        if dig >= length preds
                 then wb 
                 else completeWord wb newWord
         where
