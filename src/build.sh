@@ -1,1 +1,1 @@
-ghc -O2 Dump -XTypeSynonymInstances -XFlexibleInstances -rtsopts
+ghc -O2 Interact -XTypeSynonymInstances -XFlexibleInstances -rtsopts
